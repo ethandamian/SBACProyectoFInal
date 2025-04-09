@@ -1,13 +1,11 @@
 import unittest
 import tempfile
 import os
-import sys
 import shutil
 from types import SimpleNamespace
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from libsbac import cmd_init, GitRepository
+from src.commands.init import cmd_init
+from src.repository import GitRepository
 
 class TestSbacCmdInit(unittest.TestCase):
 
