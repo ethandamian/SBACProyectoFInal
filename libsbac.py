@@ -28,6 +28,17 @@ def main():
     checkout_parser = subparsers.add_parser("checkout", help="Switch branches or restore working tree files")
     checkout_parser.add_argument("target", help="Branch, commit or tag to checkout")
 
+    # Branch command
+    branch_parser = subparsers.add_parser("branch", help="Create, list or delete branches")
+    branch_group = branch_parser.add_mutually_exclusive_group(required=True)
+    branch_group.add_argument("-c", "--create", metavar="BRANCH_NAME", help="Create a new branch")
+    branch_group.add_argument("-d", "--delete", metavar="BRANCH_NAME", help="Delete a branch")
+    branch_group.add_argument("-l", "--list", action="store_true", help="List all branches")
+    branch_parser.add_argument("-s", "--start-point", help="Start the new branch at specific commit/tag/branch")
+
+    # List branches command (alternativo, puedes usar branch -l en su lugar)
+    list_branches_parser = subparsers.add_parser("list-branches", help="List all branches")
+
     # Tag command
     tag_parser = subparsers.add_parser("tag", help="Create a tag reference")
     tag_parser.add_argument("tag_name", help="Name of the tag")
@@ -60,6 +71,15 @@ def main():
             sbac.log()
         elif args.command == "checkout":
             sbac.checkout(args.target)
+        elif args.command == "branch":
+            if args.create:
+                sbac.create_branch(args.create, args.start_point)
+            elif args.delete:
+                sbac.delete_branch(args.delete)
+            elif args.list:
+                sbac.list_branches()
+        elif args.command == "list-branches":
+            sbac.list_branches()
         elif args.command == "tag":
             sbac.tag(args.tag_name)
         elif args.command == "list-tags":
