@@ -196,6 +196,28 @@ index: Almacena el estado del área de preparación (staging area).
 
 config: Almacena la configuración del repositorio, como el nombre del autor.
 
+## Pruebas
+
+El repositorio cuenta con pruebas realizadas con un unittest y se pueden correr de dos formas
+
+Correr todos los tests:
+
+```bash
+python3 -m unittest discover tests
+```
+
+Correr un archivo test en específico:
+
+```bash
+python3 -m unittest tests/test_sbac_<nombre_test>.py
+```
+
+Para correr las pruebas de integración:
+
+```bash
+python3 -m unittest tests/integration/test_sbac_integration.py
+```
+
 ## Limitaciones
 
 SBAC es una implementación simplificada y tiene las siguientes limitaciones:
